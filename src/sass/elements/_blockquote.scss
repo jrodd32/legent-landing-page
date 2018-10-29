@@ -1,0 +1,9 @@
+.blockquote {
+  margin: ($gap * 2) 0;
+
+  @include getStyle() {
+    *:not(cite) {
+      color: $color;
+    }
+  }
+}

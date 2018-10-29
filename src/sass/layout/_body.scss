@@ -1,0 +1,9 @@
+body {
+  background-color: $cream;
+
+  &.has-modal-active {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+  }
+}

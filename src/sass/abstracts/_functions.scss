@@ -1,0 +1,20 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+
+// Get color values from theme
+@function theme($key) {
+  @return map-get($themeVar, $key);
+}
+
+// Encodes hex colors hash symbol, ex. #FFF -> %23FFF
+// Firefox needs encoded colors to use
+// inlined SVGs as background images
+@function encodeColor($string) {
+  @if type-of($string) == 'color' {
+    $hex: str-slice(ie-hex-str($string), 4);
+    $string:unquote("#{$hex}");
+  }
+
+  @return'%23' + $string;
+}

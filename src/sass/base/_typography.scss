@@ -1,0 +1,201 @@
+html {
+  // Makes 1rem === 10px
+  font-size: 62.5%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: $font-sans-serif;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+  font-family: $font-serif;
+  letter-spacing: -2px;
+  font-weight: $font-weight-bold;
+  font-style: normal;
+  line-height: 1.2;
+  margin-bottom: $vertical-spacing;
+
+  a {
+    color: inherit;
+    font-family: inherit;
+
+    &:hover {
+      border-bottom: .05em solid #000;
+      color: #000;
+      text-decoration: none;
+    }
+  }
+}
+
+h1,
+.is-1 {
+  font-size: 4rem;
+
+  @include desktop() {
+    font-size: 5rem;
+  }
+}
+
+h2,
+.is-2 {
+  font-size: 3.4rem;
+
+  @include desktop() {
+    font-size: 4.4rem;
+  }
+}
+
+h3,
+.is-3 {
+  font-size: 3rem;
+
+  @include desktop() {
+    font-size: 4rem;
+  }
+}
+
+h4,
+.is-4 {
+  font-size: 2.4rem;
+
+  @include desktop() {
+    font-size: 3.2rem;
+  }
+}
+
+h5,
+.is-5 {
+  font-size: 2.2rem;
+
+  @include desktop() {
+    font-size: 2.8rem;
+  }
+}
+
+h6,
+.is-6 {
+  font-size: 2rem;
+
+  @include desktop() {
+    font-size: 2.4rem;
+  }
+}
+
+blockquote {
+  font-size: 1.4em;
+  margin: 1.5rem 0;
+
+  *:not(cite) {
+    font-family: $font-serif;
+  }
+
+  cite {
+    display: block;
+    font-size: .6em;
+    font-style: normal;
+
+    &:before {
+      content: "— ";
+      display: inline;
+    }
+  }
+}
+
+p,
+blockquote,
+ul,
+ol {
+  margin-bottom: $vertical-spacing;
+}
+
+a {
+  color: #000;
+  border-bottom: 1px solid transparent;
+  transition: color .4s ease, border .4s ease;
+
+  &:hover {
+    color: #000;
+    border-color: currentColor;
+    text-decoration: none;
+  }
+}
+
+.lead {
+  font-size: 1.2em;
+  font-weight: $font-weight-bold;
+}
+
+dl:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+dd {
+  padding: .5em 0;
+}
+
+dl {
+  width: 100%;
+}
+
+dt,
+dd {
+  display: inline-block;
+  width: 30%;
+}
+
+dt {
+  text-align: right;
+  font-weight: $font-weight-bold;
+  clear: left;
+  float: left;
+}
+
+dd {
+  width: 70%;
+  padding-left: 1em;
+  clear: right;
+}
+
+dd + dd {
+  float: right;
+  clear: both;
+  padding-top: 0;
+}
+
+dt:first-child {
+  padding-top: .5em;
+}
+
+dd + dt {
+  clear: both;
+  padding-top: .5em;
+}
+
+dt + dt {
+  width: 100%;
+  float: none;
+  padding: 0 70% 0 0;
+}
+
+figcaption {
+  margin-top: .5em;
+}
+
+small {
+  &.block {
+    display: block;
+  }
+}

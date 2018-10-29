@@ -1,0 +1,312 @@
+$split-spacing: $gap;
+
+.split {
+  display: flex;
+  flex-direction: column;
+
+  @supports (display: grid) {
+    display: grid;
+  }
+
+  position: relative;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: $split-spacing * 2;
+
+  &.is-divided {
+    @include desktop() {
+      flex-direction: row;
+      grid-gap: $split-spacing * 3;
+      grid-template-columns: minmax(auto, $container * .55 - $gap * 3)
+        minmax(auto, $container * .45);
+      grid-template-rows: auto;
+
+      &.is-reverse {
+        flex-direction: row-reverse;
+        grid-template-columns: minmax(auto, $container * .45)
+          minmax(auto, $container * .55 - $gap * 3);
+      }
+    }
+
+    @include cinema() {
+      grid-gap: $split-spacing * 5;
+      grid-template-columns: minmax(auto, $container * .55 - $gap * 5)
+        minmax(auto, $container * .45);
+
+      &.is-reverse {
+        grid-template-columns: minmax(auto, $container * .45)
+          minmax(auto, $container * .55 - $gap * 5);
+      }
+    }
+  }
+
+  &.is-content-split {
+    grid-gap: $split-spacing * 2;
+
+    @include desktop() {
+      grid-gap: $split-spacing * 3;
+    }
+
+    .split-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      .content {
+        max-width: 60%;
+
+        @supports (display: grid) {
+          max-width: none;
+        }
+      }
+
+      @supports (display: grid) {
+        display: grid;
+        justify-content: initial;
+      }
+
+      grid-gap: $split-spacing;
+
+      @include desktop() {
+        grid-template-columns: minmax(auto, 40rem) 1fr;
+        padding-left: $split-spacing * 2;
+        padding-right: $split-spacing * 2;
+      }
+
+      @include cinema() {
+        grid-gap: $split-spacing * 4;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0;
+        margin-right: $split-spacing;
+
+        @supports (display: grid) {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &.is-two-up {
+    grid-gap: $split-spacing * 2;
+
+    @include desktop() {
+      grid-gap: $split-spacing * 3;
+    }
+
+    .split-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      @supports (display: grid) {
+        display: grid;
+        justify-content: initial;
+      }
+
+      grid-gap: $split-spacing * 2;
+
+      .content {
+        max-width: 40%;
+
+        @supports (display: grid) {
+          max-width: none;
+        }
+      }
+
+      @include desktop() {
+        grid-template-columns: 1fr 1fr;
+        padding-left: $split-spacing * 2;
+        padding-right: $split-spacing * 2;
+      }
+
+      @include cinema() {
+        grid-gap: $split-spacing * 4;
+      }
+    }
+  }
+
+  &.has-background {
+    @include touch() {
+      grid-gap: $gap * 2;
+    }
+
+    .split-content {
+      padding-bottom: $gap * 2;
+      color: $white;
+    }
+
+    .split-background {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 1000%;
+      height: 100%;
+      content: "";
+      z-index: -1;
+      background-color: $black;
+    }
+  }
+}
+
+.split-content {
+  grid-row: 2;
+
+  @include touch() {
+    .split.has-mobile-first-content & {
+      grid-row: 1;
+    }
+  }
+
+  @include desktop() {
+    .split.is-reverse & {
+      grid-row: 1;
+    }
+  }
+
+  @include touch() {
+    padding-left: $split-spacing;
+    padding-right: $split-spacing;
+  }
+
+  .split.is-divided & {
+    max-width: 150rem;
+
+    @supports (display: grid) {
+      max-width: none;
+    }
+
+    @include desktop() {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: center;
+      padding-top: $gap * 2;
+      padding-bottom: $gap * 2;
+      padding-right: $gap * 3;
+    }
+
+    @include cinema() {
+      padding-right: $gap * 5;
+    }
+  }
+
+  .split.is-divided.is-reverse & {
+    @include desktop() {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+      padding-left: $gap * 3;
+      padding-right: 0;
+    }
+
+    @include cinema() {
+      padding-left: $gap * 5;
+    }
+  }
+
+  .split.is-divided.is-reverse.has-carousel & {
+    @include desktop() {
+      padding-right: $split-spacing * 2;
+    }
+  }
+
+  .content {
+    .button:last-child {
+      margin-top: $gap;
+    }
+  }
+}
+
+.split-image {
+  position: relative;
+  grid-row: 1;
+  width: 100%;
+  margin-bottom: $split-spacing * 2;
+
+  @supports (display: grid) {
+    margin: 0;
+    width: auto;
+  }
+
+  @include touch() {
+    .split.has-mobile-first-content & {
+      grid-row: 2;
+    }
+  }
+
+  @include desktop() {
+    .split.is-reverse & {
+      grid-row: 2;
+    }
+  }
+
+  .split.is-divided & {
+    margin-bottom: 0;
+    margin-right: $split-spacing * 2;
+
+    @supports (display: grid) {
+      margin: 0;
+    }
+
+    @include desktop() {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row: 1;
+    }
+
+    .button {
+      left: 0;
+      right: auto;
+    }
+  }
+
+  .split.is-divided.is-reverse & {
+    margin-bottom: 0;
+    margin-left: $split-spacing * 2;
+
+    @supports (display: grid) {
+      margin: 0;
+    }
+
+    @include desktop() {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row: 1;
+    }
+
+    .button {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  .media-button {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+    right: $gap;
+    background-color: $black;
+    border-radius: 0;
+    border: 0;
+    color: $white;
+
+    @include touch() {
+      right: 0;
+      font-size: $font-size;
+    }
+  }
+
+  picture {
+    display: block;
+  }
+
+  img {
+    width: 100%;
+  }
+}

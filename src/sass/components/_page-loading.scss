@@ -1,0 +1,10 @@
+.page-loading {
+  width: 100vw;
+  height: 100vh;
+  z-index: 101;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background: $gold;
+}

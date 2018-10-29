@@ -1,0 +1,42 @@
+// Transition Duration
+$transitionDuration: .4s;
+
+// Create Transitions
+@mixin transitions($type, $names) {
+
+  .#{$type}-enter-active,
+  .#{$type}-leave-active {
+    animation-duration: $transitionDuration;
+    animation-fill-mode: both;
+  }
+
+  .#{$type}-enter-active {
+    animation-name: #{$type}In;
+  }
+
+  .#{$type}-leave-active {
+    animation-name: #{$type}Out;
+  }
+
+  @each $name in $names {
+    .#{$type}#{$name}-enter-active,
+    .#{$type}#{$name}-leave-active {
+      animation-duration: $transitionDuration;
+      animation-fill-mode: both;
+    }
+
+    .#{$type}#{$name}-enter-active, {
+      animation-name: #{$type}In#{$name};
+    }
+    .#{$type}#{$name}-leave-active {
+      animation-name: #{$type}Out#{$name};
+    }
+  }
+}
+
+// Transition Types
+@import "bounce/all";
+@import "fade/all";
+@import "grow/all";
+@import "rotate/all";
+@import "slide/all";

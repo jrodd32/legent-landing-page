@@ -1,0 +1,169 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+// Clearfix
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// Breakpoints
+@mixin small-mobile {
+  @media screen and (max-width: $mobile - 1px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $tablet - 1px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $tablet), print {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media screen and (min-width: $tablet) and (max-width: $desktop - 1px) {
+    @content;
+  }
+}
+
+@mixin touch {
+  @media screen and (max-width: $desktop - 1px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media screen and (min-width: $desktop) and (max-width: $widescreen - 1px) {
+    @content;
+  }
+}
+
+@mixin desktop-to-cinema {
+  @media screen and (min-width: $desktop) and (max-width: $cinema - 1px) {
+    @content;
+  }
+}
+
+@mixin widescreen {
+  @media screen and (min-width: $widescreen) {
+    @content;
+  }
+}
+
+@mixin widescreen-only {
+  @media screen and (min-width: $widescreen) and (max-width: $cinema - 1px) {
+    @content;
+  }
+}
+
+@mixin widescreen-down {
+  @media screen and (max-width: $cinema) {
+    @content;
+  }
+}
+
+@mixin cinema {
+  @media screen and (min-width: $cinema) {
+    @content;
+  }
+}
+
+@mixin cinema-only {
+  @media screen and (min-width: $cinema) and (max-width: $ultrawide - 1px) {
+    @content;
+  }
+}
+
+@mixin ultrawide {
+  @media screen and (min-width: $ultrawide) {
+    @content;
+  }
+}
+
+@mixin retina {
+  @media screen and (min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi) {
+    @content;
+  }
+}
+
+@mixin short {
+  @media screen and (max-height: $shortscreen) {
+    @content;
+  }
+}
+
+@mixin ie {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+@mixin getStyle($styles: $styles) {
+  @each $style, $color in $styles {
+    $style: $style !global;
+    $color: $color !global;
+
+    &.is-#{$style} {
+      @content;
+    }
+
+    $style: null !global;
+    $color: null !global;
+  }
+}
+
+@mixin getState($states: $states) {
+  @each $state, $color in $states {
+    $state: $state !global;
+    $color: $color !global;
+
+    &.is-#{$state} {
+      @content;
+    }
+
+    $state: null !global;
+    $color: null !global;
+  }
+}
+
+@function nth-value($list, $index) {
+  @return if(length($list) >= $index, nth($list, $index), null);
+}
+
+@mixin aspect-ratio($arglist... /*$ratio or $width, $height*/) {
+  $map: keywords($arglist);
+  $height: map-get($map, height) or nth-value($arglist, 2);
+  $width: map-get($map, width)  or nth-value($arglist, 1);
+  $ratio: map-get($map, ratio)  or if($width and $height, $width/$height, nth-value($arglist, 1)) or 1;
+  $padding: 1/$ratio * 100%;
+
+  &::before,
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+    width: 1px;
+    margin-left: -1px;
+  }
+
+  &::before {
+    float: left;
+    padding-bottom: $padding;
+  }
+}

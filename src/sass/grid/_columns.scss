@@ -1,0 +1,64 @@
+$columns: 12;
+$column-gap: $gap;
+
+.column {
+  margin-bottom: $column-gap * 2;
+  width: 100%;
+
+  @include desktop() {
+    padding-left: $column-gap;
+    padding-right: $column-gap;
+
+    @for $column from 1 through $columns {
+      &.column-#{$column} {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: (100% / $columns) * $column;
+        max-width: (100% / $columns) * $column;
+      }
+    }
+  }
+
+  &.column-auto {
+    @include desktop() {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+      max-width: 100%;
+    }
+  }
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: -$column-gap * 2;
+
+  @include desktop() {
+    justify-content: flex-start;
+    margin-left: -$column-gap;
+    margin-right: -$column-gap;
+  }
+
+  @include widescreen-down() {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  &.is-gapless {
+    margin: 0;
+
+    .column {
+      padding: 0;
+    }
+  }
+
+  &.is-reversed {
+    flex-direction: row-reverse;
+  }
+
+  &.is-centered {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,98 @@
+@font-face {
+  font-family: "icomoon";
+  src: url("~/fonts/icons/icomoon.woff2?yi5ery") format("woff2"),
+    url("~/fonts/icons/icomoon.woff?yi5ery") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"]:not(.has-flag),
+[class*=" icon-"]:not(.has-flag),
+.icomoon {
+  font-family: "icomoon" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-padlock:before {
+  content: "\e914";
+}
+.icon-play:before {
+  content: "\e91d";
+}
+.icon-location:before {
+  content: "\e917";
+}
+.icon-map-location:before {
+  content: "\e928";
+}
+.icon-info:before {
+  content: "\e908";
+}
+.icon-dollar:before {
+  content: "\e916";
+}
+.icon-coin-dollar:before {
+  content: "\e918";
+}
+.icon-add:before {
+  content: "\e91a";
+}
+.icon-cancel:before {
+  content: "\e909";
+}
+.icon-caret-down:before {
+  content: "\e910";
+}
+.icon-caret-left:before {
+  content: "\e911";
+}
+.icon-caret-right:before {
+  content: "\e912";
+}
+.icon-caret-up:before {
+  content: "\e913";
+}
+.icon-check:before {
+  content: "\e90a";
+}
+.icon-minus:before {
+  content: "\e91b";
+}
+.icon-share:before {
+  content: "\e930";
+}
+.icon-printer:before {
+  content: "\e91c";
+}
+.icon-search:before {
+  content: "\e90b";
+}
+.icon-key:before {
+  content: "\e90d";
+}
+.icon-arrow-down:before {
+  content: "\e931";
+}
+.icon-arrow-left:before {
+  content: "\e932";
+}
+.icon-arrow-right:before {
+  content: "\e933";
+}
+.icon-arrow-up:before {
+  content: "\e934";
+}
+.icon-rotate:before {
+  content: "\e935";
+}
+.icon-help:before {
+  content: "\e90e";
+}

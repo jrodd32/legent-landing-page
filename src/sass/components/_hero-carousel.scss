@@ -1,0 +1,178 @@
+.hero-carousel {
+  &.is-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+  }
+
+  &.is-showing {
+    z-index: 99;
+  }
+
+  &.is-loading {
+    .section-content,
+    .scroll-progress,
+    .hero-carousel-nav {
+      opacity: 0;
+    }
+  }
+
+  &.is-ready {
+    .section:not(:first-child) {
+      opacity: 1;
+    }
+  }
+
+  h1 {
+    color: $white;
+  }
+
+  .scroll-progress {
+    position: fixed;
+    bottom: 5%;
+    left: 5%;
+    z-index: 10;
+    width: auto;
+  }
+
+  .scroll-progress-bar {
+    width: 30rem;
+  }
+}
+
+.hero-carousel-content {
+  @include desktop() {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .section {
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+
+    &:not(:first-child) {
+      opacity: 0;
+    }
+
+    h1,
+    h2 {
+      font-size: 4rem;
+    }
+
+    .section-content {
+      flex: 1;
+      max-width: none;
+      text-align: left;
+      justify-self: flex-start;
+      transition: opacity .5s ease;
+    }
+
+    @include tablet-only() {
+      h1,
+      h2 {
+        font-size: 8rem;
+      }
+    }
+
+    @include desktop() {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      padding: 0 5%;
+
+      &:first-child {
+        z-index: 1;
+      }
+
+      h1,
+      h2 {
+        font-size: 15rem;
+      }
+    }
+  }
+}
+
+.hero-carousel-nav {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  transition: opacity .5s ease;
+
+  @include desktop() {
+    flex-direction: row;
+  }
+
+  .button.is-icon-only {
+    width: auto;
+    height: auto;
+  }
+
+  .circle {
+    margin: 1rem 0;
+
+    @include desktop() {
+      margin: 0 1rem;
+    }
+
+    i {
+      border: 2px solid currentColor;
+      border-radius: 100%;
+      display: block;
+      height: 3rem;
+      width: 3rem;
+    }
+  }
+}
+
+.hero-carousel-nav-prev {
+  transform: rotate(90deg);
+
+  @include desktop() {
+    transform: none;
+  }
+}
+
+.hero-carousel-nav-next {
+  transform: rotate(90deg);
+
+  @include desktop() {
+    transform: none;
+  }
+}
+
+.cssmask .hero-carousel {
+  @include desktop() {
+    background-image: url("~/images/image-mask.png");
+    background-size: 0;
+
+    .section.is-hiding {
+      mask: url("~/images/image-mask.png");
+      mask-size: 7100% 100%;
+      animation: maskTransition 1s steps(70) forwards;
+    }
+  }
+}
+
+.no-cssmask .hero-carousel .section.is-hiding {
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+@keyframes maskTransition {
+  from {
+	  mask-position: 0% 0;
+  }
+  to {
+	  mask-position: 100% 0;
+  }
+}

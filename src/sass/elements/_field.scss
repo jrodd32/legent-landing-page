@@ -1,0 +1,483 @@
+$field-font-size: $font-size;
+$field-font-weight: $font-weight;
+$field-height: 2.4em;
+$field-padding: 1em;
+$field-border-size: 2px;
+$field-line-height: 1.5;
+$field-arrow-size: .5em;
+$field-gap: 1em;
+$field-transition-duration: .2s;
+$field-border-radius: .1em;
+$field-icon-size: 1em;
+
+::placeholder {
+  opacity: 0;
+  visibility: hidden;
+  color: currentColor;
+}
+
+@mixin field() {
+  display: inline-block;
+  height: $field-height;
+  padding: 0 ($field-padding * 1.5) 0 0;
+  max-width: 100%;
+  width: 100%;
+  background-color: transparent;
+  border-color: $black;
+  border-width: 0 0 $field-border-size;
+  border-style: solid;
+  border-radius: 0;
+  color: $black;
+  font-family: $font-sans-serif;
+  font-size: $field-font-size;
+  font-weight: $field-font-weight;
+  line-height: $field-line-height;
+  transition-duration: $field-transition-duration;
+  transition-timing-function: ease;
+  transition-property: all;
+  outline: 0;
+
+  & ~ .icon {
+    color: inherit;
+  }
+
+  &[disabled] {
+    opacity: .5;
+    border-bottom-style: dashed;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &:valid {
+    opacity: 1;
+  }
+
+  .field.is-centered & {
+    text-align: center;
+  }
+
+  @each $size, $multipler in $scale {
+    .field.is-#{$size} & {
+      font-size: $multipler;
+    }
+  }
+}
+
+.label {
+  display: inline-flex;
+  color: inherit;
+
+  @each $size, $multipler in $scale {
+    .field.is-#{$size} & {
+      font-size: $multipler;
+    }
+  }
+
+  .field & {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: inherit;
+    display: block;
+    transform: translateY(1.46em);
+    transform-origin: 0% 100%;
+    pointer-events: none;
+    z-index: 2;
+    transition-duration: $field-transition-duration;
+    transition-timing-function: ease;
+    transition-property: transform;
+  }
+
+  .field.has-icon & {
+    transform: translate(1.5em, 1.46em);
+  }
+
+  .field.is-centered & {
+    right: 0;
+    display: inline;
+    transform-origin: top;
+  }
+
+  .field.is-focus &,
+  .field.has-placeholder &,
+  .field.has-multiple &,
+  .field.has-value & {
+    transform: translateY(-.25em) scale(.85);
+    pointer-events: auto;
+  }
+
+  &.is-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+  }
+}
+
+.helper {
+  display: block;
+  transform-origin: 0% 100%;
+  transform: scale(.85);
+  color: inherit;
+}
+
+.input {
+  @include field;
+
+  &:required, &:invalid {
+    box-shadow: none;
+  }
+
+  &[type=number].as-text {
+    -moz-appearance: textfield;
+    appearance: none;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+.select {
+  @include field;
+  appearance: none;
+  padding-right: $field-padding + $field-arrow-size;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &[multiple] {
+    padding: 0;
+    height: auto;
+
+    option {
+      padding: $field-padding / 2;
+    }
+  }
+}
+
+.textarea {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  min-width: 100%;
+  line-height: 1.5;
+
+  > textarea,
+  > pre {
+    @include field;
+    margin: 0;
+    padding-top: .4em;
+    padding-bottom: .4em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  > textarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    resize: none;
+    overflow: auto;
+  }
+
+  > pre {
+    min-height: $field-height;
+    height: auto;
+    display: block;
+    visibility: hidden;
+  }
+}
+
+.control {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: $field-border-size * 1.5;
+    background-color: currentColor;
+    z-index: 1;
+    width: 0;
+    transition: width .3s;
+  }
+
+  &:after {
+    @extend .icomoon;
+    position: absolute;
+    top: ($field-height / 2) - ($field-padding / 2);
+    right: 0;
+    width: $field-icon-size;
+    height: $field-icon-size;
+    z-index: 2;
+    pointer-events: none;
+
+    .field.has-select & {
+      content: "\e910" !important;
+    }
+
+    .field.is-disabled & {
+      content: "\e914" !important;
+    }
+  }
+
+  > .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $field-padding;
+    height: $field-height;
+    line-height: $field-height;
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @each $size, $multipler in $scale {
+    .field.is-#{$size} & {
+      font-size: $multipler;
+    }
+  }
+}
+
+.field {
+  position: relative;
+  padding-top: $field-padding;
+  padding-bottom: $field-padding;
+  transition-duration: $field-transition-duration;
+  transition-timing-function: ease;
+  transition-property: color;
+
+  &.is-focus {
+    .control:before {
+      width: 100%;
+    }
+
+    ::placeholder {
+      opacity: 1;
+      visibility: visible;
+      color: currentColor;
+    }
+  }
+
+  &.has-placeholder {
+    ::placeholder {
+      opacity: 1;
+      visibility: visible;
+      color: currentColor;
+    }
+  }
+
+  &.is-disabled {
+    opacity: .5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &.is-centered {
+    text-align: center;
+  }
+
+  &.is-wide {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+
+    .select {
+      width: 100%;
+      display: block;
+
+      select {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  &.has-icon .control {
+    input,
+    select {
+      padding-left: $field-padding * 1.5;
+    }
+  }
+
+  &.has-multiple {
+    display: flex;
+
+    .control {
+      flex: 1 1 auto;
+
+      &:not(:last-child) {
+        margin-right: $field-gap;
+      }
+    }
+  }
+
+  &.has-checkbox,
+  &.has-radio {
+    padding-top: $field-padding / 5;
+    padding-bottom: $field-padding / 5;
+  }
+
+  &.is-birthday {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 13em;
+    flex-wrap: wrap;
+
+    &.full-width {
+      .control,
+      .control:last-of-type {
+        max-width: none;
+      }
+    }
+
+    .control {
+      max-width: 4em;
+      flex: 1 0 33%;
+
+      input {
+        padding-left: $field-padding / 2;
+        padding-right: $field-padding / 2;
+        text-align: center;
+      }
+
+      &:not(:last-of-type) {
+        margin-right: 0;
+
+        &:after {
+          background-color: currentColor;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%) skew(-8deg);
+          right: 0;
+          width: $field-border-size;
+          height: 50%;
+          content: '';
+        }
+      }
+
+      &:last-of-type {
+        max-width: 5em;
+        margin-right: 0;
+      }
+    }
+
+    @include getState() {
+      .control {
+        .input {
+          padding-left: $field-padding / 2;
+          padding-right: $field-padding / 2;
+        }
+        &:last-of-type {
+          .input {
+            padding-right: $field-padding;
+          }
+        }
+      }
+    }
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  @each $size, $multipler in $scale {
+    &.is-#{$size} {
+      font-size: $multipler;
+    }
+  }
+
+  @include getState() {
+    .control {
+      &:before {
+        background-color: $color;
+      }
+
+      &:after {
+        color: $color;
+        font-size: inherit;
+
+        @if $state == success {
+          content: "\e90a";
+        }
+        @else if $state == danger {
+          content: "\e909";
+        }
+        @else if $state == info {
+          content: "\e90e";
+        }
+      }
+
+      input,
+      select,
+      textarea {
+        border-color: $color;
+      }
+    }
+
+    .helper {
+      color: $color;
+    }
+
+    @each $size, $multipler in $scale {
+      &.is-centered .input {
+        padding-left: $field-padding * 1.5;
+      }
+    }
+  }
+
+  .fields & {
+    flex-shrink: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 0;
+      margin-right: $field-gap;
+    }
+  }
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+
+  &:last-child {
+    margin-bottom: -1rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  &.is-center {
+    justify-content: center;
+  }
+
+  &.is-right {
+    justify-content: flex-end;
+  }
+}
+
+.field-with-button {
+  @include tablet() {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
+    > * {
+      margin: 0 $gap;
+    }
+  }
+}

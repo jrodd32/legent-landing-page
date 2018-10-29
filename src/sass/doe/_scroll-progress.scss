@@ -1,0 +1,53 @@
+$progressOffset: $gap * 4;
+
+.scroll-progress {
+  display: none;
+  align-items: center;
+  width: 100%;
+  z-index: 90;
+  transition: opacity .5s ease;
+
+  @include desktop() {
+    display: flex;
+  }
+
+  &.fade-in {
+    opacity: 0;
+  }
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &.is-right {
+    transform-origin: top right;
+    transform: rotate(90deg) translateX(-9%); // FIXME: magical numbers are no fun
+    width: 85vh;
+    position: fixed;
+    right: $progressOffset;
+    top: 100%;
+    z-index: 150;
+  }
+}
+
+.scroll-progress-text {
+  color: $cream;
+  margin-right: 1.5rem;
+
+  .is-dark-text & {
+    color: $black;
+  }
+}
+
+.scroll-progress-bar {
+  height: .3rem;
+  background: $gold;
+  flex: 1;
+
+  i {
+    display: block;
+    height: .3rem;
+    background: $cream;
+    transition: margin .3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+}

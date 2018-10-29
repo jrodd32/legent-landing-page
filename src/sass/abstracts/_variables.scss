@@ -1,0 +1,70 @@
+// Typography
+$font-serif: "ITC Giovanni Std", Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
+$font-sans-serif: "ITC Legacy Sans", "Legacy Sans ITC", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+$font-size: 1.8rem;
+$font-size-xsmall: 1.32rem;
+$font-size-small: 1.55rem;
+$font-size-medium: 2rem;
+$font-size-large: 2.2rem;
+$font-size-xlarge: 2.6rem;
+$font-weight: 300;
+$font-weight-bold: 600;
+$line-height: 1.6;
+$vertical-spacing: 2.4rem;
+$component-spacing: 12rem;
+$body-offset: 7rem;
+$body-offset-tablet: 10rem;
+$border-radius: 3px;
+$border-radius-large: 50%;
+$transition-duration: .4s;
+$masthead-offset: 11rem;
+
+// Colors
+$black: rgba(0,0,0,.92);
+$danger: #C50F3B;
+$gold: #CDA050;
+$grey: #353639;
+$silver: #D8D8D6;
+$success: #66C244;
+$wave: #5DC4D7;
+$white: #fff;
+$cream: #f8f8f3;
+
+// Colors
+$states: (
+  success: $success,
+  danger: $danger,
+  info: $silver
+);
+
+$styles: (
+  black: $black,
+  danger: $danger,
+  gold: $gold,
+  grey: $grey,
+  silver: $silver,
+  success: $success,
+  wave: $wave,
+  white: $white
+);
+
+// Sizing
+$scale: (
+  xsmall: $font-size-xsmall,
+  small: $font-size-small,
+  medium: $font-size-medium,
+  large: $font-size-large,
+  xlarge: $font-size-xlarge
+);
+
+// Grid
+$container: 1344px;
+$gap: 24px;
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 960px + (2 * $gap);
+$widescreen: 1152px + (2 * $gap);
+$cinema: 1344px + (2 * $gap);
+$ultrawide: 1600px + (2 * $gap);
+$shortscreen: 950px;

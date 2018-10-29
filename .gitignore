@@ -1,0 +1,7 @@
+.env
+.DS_Store
+.DS_Store*
+.last_published
+*.log
+node_modules/
+.vscode/

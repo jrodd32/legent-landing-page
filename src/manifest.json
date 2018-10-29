@@ -1,0 +1,16 @@
+{
+  "short_name": "Legent",
+  "name": "Legent",
+  "icons": [
+    {
+      "src": "assets/icon.png", // TODO: update
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#0F0F0F", // TODO: update
+  "theme_color": "#0F0F0F", // TODO: update
+  "display": "standalone",
+  "orientation": "portrait"
+}

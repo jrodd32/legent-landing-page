@@ -1,0 +1,378 @@
+$button-font-size: $font-size;
+$button-height: 3.45em;
+$button-padding: 1.8em;
+$button-border-radius: $border-radius;
+$button-border-size: 1px;
+$button-line-height: $line-height;
+$button-transition-duration: $transition-duration;
+$button-icon-spacing: .5em;
+
+@mixin button() {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: $button-padding;
+  padding-left: $button-padding;
+  height: $button-height;
+  background-color: $black;
+  border-width: 0;
+  border-radius: $button-border-radius;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: $button-font-size;
+  font-weight: $font-weight;
+  line-height: $button-line-height;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: $white;
+  transition-duration: $button-transition-duration;
+  transition-timing-function: ease;
+  transition-property: background-color, color, border, box-shadow;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:disabled {
+    opacity: .5;
+    cursor: default;
+  }
+
+  &:hover:not([disabled]) {
+    color: $white;
+  }
+
+  &:focus:not([disabled]) {
+    outline: 0;
+  }
+
+  @include getStyle() {
+    background-color: $color;
+
+    @if $style == silver or
+      $style == white {
+      color: $black;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: $color;
+      color: $white;
+
+      @if $style == silver or
+        $style == white {
+        color: $black;
+      }
+    }
+  }
+
+  &.is-icon-only {
+    justify-content: center;
+    padding: 0;
+    width: $button-height;
+
+    .icon {
+      margin: 0;
+      font-size: 1.125em;
+    }
+
+    &.is-xsmall {
+      height: $button-height / 1.75;
+      width: $button-height / 1.75;
+      font-size: 1.25rem;
+    }
+  }
+
+  &.is-icon-right {
+    flex-direction: row-reverse;
+
+    .icon {
+      margin-right: 0;
+      margin-left: $button-icon-spacing;
+    }
+  }
+
+  &.is-full-width {
+    justify-content: center;
+    margin-top: $gap;
+    position: relative;
+    width: 100%;
+    z-index: 5;
+  }
+
+  @each $size, $multipler in $scale {
+    &.is-#{$size} {
+      font-size: $multipler;
+    }
+  }
+
+  &.is-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &.is-transparent {
+    background-color: transparent;
+    background-image: none;
+    color: currentColor;
+    border: 0;
+
+    &:before,
+    &:after {
+      content: none;
+    }
+
+    &:hover:not([disabled]),
+    &:focus:not([disabled]),
+    &:active:not([disabled]) {
+      background-color: transparent;
+      color: currentColor;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+
+  &.is-blended {
+    background-color: $black;
+    background-image: linear-gradient(135deg, lighten($black, 35%) 0%, $black 100%);
+    color: $white;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: linear-gradient(135deg, $black 0%, lighten($black, 35%) 100%);
+      content: "";
+      z-index: 1;
+      transition-duration: $button-transition-duration;
+      transition-timing-function: ease;
+      transition-property: opacity;
+    }
+
+    &:after {
+      position: absolute;
+      background-color: $white;
+      top: 4px;
+      right: 4px;
+      bottom: 4px;
+      left: 4px;
+      border-radius: $button-border-radius;
+      z-index: 2;
+      content: "";
+      opacity: 0;
+      transition-duration: $button-transition-duration;
+      transition-timing-function: ease;
+      transition-property: opacity;
+    }
+
+    &:hover:not([disabled]) {
+      text-decoration: none;
+      color: $white;
+
+      &:before {
+        opacity: 0;
+      }
+    }
+
+    &:active:not([disabled]) {
+      color: $black;
+
+      &:after {
+        opacity: 1;
+      }
+    }
+
+    @include getStyle() {
+      background-color: $color;
+      background-image: linear-gradient(135deg, $color 0%, darken($color, 25%) 100%);
+
+      @if $style == silver or
+        $style == white {
+        color: $black;
+      }
+
+      @if $style == grey {
+        background-image: linear-gradient(135deg, lighten($color, 35%) 0%, $color 100%);
+      }
+
+      &:before {
+        background-image: linear-gradient(135deg, darken($color, 25%) 0%, $color 100%);
+
+        @if $style == grey {
+          background-image: linear-gradient(135deg, $color 0%, lighten($color, 35%) 100%);
+        }
+      }
+
+      &:hover:not([disabled]) {
+        background-color: $color;
+        color: $white;
+
+        @if $style == silver or
+          $style == white {
+          color: $black;
+        }
+      }
+
+      &:active:not([disabled]) {
+        color: $color;
+
+        @if $style == silver or
+          $style == white {
+          color: $black;
+        }
+      }
+    }
+  }
+
+  &.is-abstract {
+    position: relative;
+    background-color: transparent;
+    padding-right: $button-padding * 1.5;
+    padding-left: $button-padding * 1.5;
+    color: $black;
+    border-radius: 0;
+    overflow: visible;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      width: $button-height;
+      height: $button-height;
+      margin: 0 auto;
+      z-index: 5;
+      transition-duration: $button-transition-duration;
+      transition-timing-function: ease;
+      transition-property: transform;
+
+      circle {
+        fill: none;
+        stroke: $black;
+        stroke-width: 4;
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+      }
+    }
+
+    &:before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      height: $button-height / 2.15;
+      background-color: $black;
+      border-radius: $border-radius / 2;
+      content: "";
+      z-index: 1;
+      transition-duration: $button-transition-duration;
+      transition-timing-function: ease;
+      transition-property: opacity, transform;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: transparent;
+      color: $black;
+
+      &:before {
+        transform: translateX(-20%);
+        opacity: 0;
+      }
+
+      svg circle {
+        animation: stroke 4s ease-out forwards;
+      }
+    }
+
+    &:active:not([disabled]) {
+      &:before {
+        transform: translateX(10%);
+        opacity: 1;
+      }
+
+      svg circle {
+        opacity: 0;
+      }
+    }
+
+    &:focus:not([disabled]) {
+      svg {
+        transform: translateY(-50%) scale(.9);
+      }
+    }
+
+    @include getStyle() {
+      svg circle {
+        stroke: $color;
+      }
+
+      &:before {
+        background-color: $color;
+      }
+    }
+
+    @keyframes stroke {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+
+  span {
+    position: relative;
+    z-index: 3;
+  }
+
+  strong {
+    color: inherit;
+  }
+
+  .icon {
+    margin-right: $button-icon-spacing;
+    font-size: .85em;
+
+    img,
+    svg {
+      max-width: 1.8em;
+    }
+  }
+}
+
+.button {
+  @include button();
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  &:last-child {
+    margin-bottom: -1rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  &.is-center {
+    justify-content: center;
+  }
+
+  &.is-right {
+    justify-content: flex-end;
+  }
+
+  .button {
+    margin-bottom: 1rem;
+
+    &:not(:first-child) {
+      margin-left: 1rem;
+    }
+  }
+}

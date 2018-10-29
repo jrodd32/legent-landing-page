@@ -1,0 +1,14 @@
+@import 'fade';
+@import 'fadeDown';
+@import 'fadeLeft';
+@import 'fadeRight';
+@import 'fadeUp';
+
+$fades:
+  Down,
+  Left,
+  Right,
+  Up
+;
+
+@include transitions(fade, $fades);

@@ -1,0 +1,56 @@
+$notification-radius: 2px;
+$notification-content-padding: 2.5rem 1.5rem;
+$notification-action-padding: 1.25rem 1.5rem;
+$notification-padding-wide: 6.5rem;
+
+.notification {
+  background-color: $black;
+  border-radius: $notification-radius;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: visible;
+  color: $white;
+
+  a:not(.button) {
+    color: currentColor;
+    text-decoration: underline;
+  }
+
+  @include getStyle() {
+    background-color: $color;
+
+    @if $style == white or
+      $style == silver {
+      color: $black;
+
+      .notification-action {
+        border-top: 1px solid transparentize($black, .8);
+      }
+    }
+  }
+}
+
+.notification-content {
+  padding: $notification-content-padding;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 1rem;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  .notification.has-close & {
+    padding-right: $notification-padding-wide;
+  }
+}
+
+.notification-action {
+  padding: $notification-action-padding;
+}

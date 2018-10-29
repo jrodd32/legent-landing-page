@@ -1,0 +1,270 @@
+$switch-font-size: $font-size;
+$switch-font-weight: $font-weight;
+$switch-height: 2.25em;
+$switch-padding: 1em;
+$switch-border-size: 2px;
+$switch-line-height: $line-height;
+$switch-transition-duration: .2s;
+$switch-border-radius: $border-radius;
+$switch-border-radius-large: $border-radius-large;
+$switch-icon-size: 1.25em;
+
+@mixin switch() {
+  position: relative;
+  padding-top: $switch-padding / 5;
+  padding-bottom: $switch-padding / 5;
+  color: inherit;
+  transition-duration: $switch-transition-duration;
+  transition-timing-function: ease;
+  transition-property: color;
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  &.is-disabled {
+    opacity: .5;
+  }
+
+  label {
+    display: block;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+
+    &[disabled],
+    input[disabled] {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.toggle {
+  @include switch;
+
+  label {
+    padding-left: 3.5em;
+    line-height: $switch-line-height * 1.55;
+  }
+
+  span {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:before,
+    &:after {
+      position: absolute;
+      left: 0;
+      content: "";
+      transition-timing-function: ease;
+      transition-duration: $switch-transition-duration;
+    }
+
+    &:first-of-type {
+      z-index: 2;
+
+      &:before {
+        background-color: transparent;
+        border-width: $switch-border-size;
+        border-style: solid;
+        border-color: currentColor;
+        border-radius: $switch-icon-size;
+        top: ($switch-line-height * 1.45 / 2) - ($switch-icon-size * 1.45 / 2);
+        width: $switch-icon-size * (1.45 * 1.7);
+        height: $switch-icon-size * 1.45;
+        transition-property: box-shadow;
+      }
+
+      &:after {
+        @extend .icomoon;
+        top: ($switch-line-height * 1.45 / 2) - ($switch-icon-size * 1.45 / 2);
+        width: $switch-icon-size * 1.45;
+        height: $switch-icon-size * 1.45;
+        background-color: currentColor;
+        border-radius: $switch-border-radius-large;
+        overflow: hidden;
+        transition-property: opacity, transform, width;
+        transform: translateX($switch-icon-size) scale(.65);
+      }
+    }
+
+    &:not(:first-of-type):last-of-type {
+      z-index: 1;
+
+      &:before,
+      &:after {
+        font-family: $font-sans-serif;
+        text-align: center;
+        line-height: $switch-icon-size * 1.5;
+        top: ($switch-line-height * 1.45 / 2) - ($switch-icon-size * 1.45 / 2);
+        width: $switch-icon-size * 1.45;
+        height: $switch-icon-size * 1.45;
+        transform: scale(.65);
+        color: inherit;
+      }
+
+      &:before {
+        content: "Off";
+      }
+
+      &:after {
+        transform: translateX($switch-icon-size) scale(.65);
+        content: "On";
+      }
+    }
+  }
+
+  [type="checkbox"]:not(:checked),
+  [type="checkbox"]:checked {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  [type="checkbox"]:checked+span:after {
+    opacity: 1;
+    transform: translateX(0) scale(.65);
+    background-color: $gold;
+  }
+
+  [type="checkbox"]:not([disabled]):active+span:before {
+    box-shadow: 0 0 8px currentColor;
+  }
+}
+
+.checkbox {
+  @include switch;
+
+  label {
+    padding-left: 1.75em;
+  }
+
+  span {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:before,
+    &:after {
+      position: absolute;
+      left: 0;
+    }
+
+    &:before {
+      top: ($switch-line-height / 2.25) - ($switch-icon-size / 2.25);
+      width: $switch-icon-size;
+      height: $switch-icon-size;
+      background-color: transparent;
+      border-width: $switch-border-size;
+      border-style: solid;
+      border-color: currentColor;
+      border-radius: $switch-border-radius;
+      transition: box-shadow $switch-transition-duration ease;
+      content: "";
+    }
+
+    &:after {
+      @extend .icomoon;
+      top: ($switch-line-height / 2.25) - ($switch-icon-size / 2.25);
+      width: 0;
+      height: $switch-icon-size;
+      transform: rotate(10deg) scale(.8);
+      border-width: $switch-border-size;
+      border-style: solid;
+      border-color: transparent;
+      border-radius: $switch-border-radius;
+      overflow: hidden;
+      transition-property: opacity, transform, width;
+      transition-duration: $switch-transition-duration;
+      transition-timing-function: ease;
+      opacity: 0;
+      content: "\e90a";
+    }
+  }
+
+  [type="checkbox"]:not(:checked),
+  [type="checkbox"]:checked {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  [type="checkbox"]:checked+span:after {
+    width: $switch-icon-size;
+    opacity: 1;
+    transform: rotate(0) scale(.8);
+  }
+
+  [type="checkbox"]:not([disabled]):active+span:before {
+    box-shadow: 0 0 8px currentColor;
+  }
+}
+
+.radio {
+  @include switch();
+
+  label {
+    padding-left: 1.75em;
+  }
+
+  span {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:before,
+    &:after {
+      position: absolute;
+      left: 0;
+      border-radius: 50%;
+    }
+
+    &:before {
+      top: ($switch-line-height / 2.45) - ($switch-icon-size / 2.45);
+      width: $switch-icon-size;
+      height: $switch-icon-size;
+      content: "";
+      background-color: transparent;
+      border-width: $switch-border-size;
+      border-style: solid;
+      border-color: currentColor;
+      transition-timing-function: ease;
+      transition-property: box-shadow;
+    }
+
+    &:after {
+      top: ($switch-line-height / 2.45) - ($switch-icon-size / 2.45);
+      width: $switch-icon-size;
+      height: $switch-icon-size;
+      content: "";
+      transform: scale(0);
+      opacity: 0;
+      transition-duration: $switch-transition-duration;
+      transition-timing-function: ease;
+      transition-property: opacity, transform;
+      background-color: currentColor;
+    }
+  }
+
+  [type="radio"]:not(:checked),
+  [type="radio"]:checked {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  [type="radio"]:checked+span:after {
+    opacity: 1;
+    transform: scale(.5);
+  }
+
+  [type="radio"]:not([disabled]):active+span:before {
+    box-shadow: 0 0 8px currentColor;
+  }
+}

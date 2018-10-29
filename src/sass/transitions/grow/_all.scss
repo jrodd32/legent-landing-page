@@ -1,0 +1,9 @@
+@import 'growLeft';
+@import 'growRight';
+
+$grows:
+  Left,
+  Right,
+;
+
+@include transitions(grow, $grows);

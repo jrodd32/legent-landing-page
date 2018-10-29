@@ -1,0 +1,51 @@
+$list-item-padding-left: 1em;
+$list-item-spacing: .25em;
+$list-item-inline-spacing: 1em;
+$list-bullet-size: .325em;
+$list-bullet-border-radius: 50%;
+
+.list {
+  padding-left: 1.8rem;
+
+  li:not(:last-child) {
+    margin-bottom: $list-item-spacing;
+  }
+
+  &:not(ol) {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      position: relative;
+      padding-left: $list-item-padding-left;
+
+      &:before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        background-color: currentColor;
+        border-radius: $list-bullet-border-radius;
+        width: $list-bullet-size;
+        height: $list-bullet-size;
+        content: "";
+      }
+    }
+
+    @include getStyle() {
+      li:before {
+        background-color: $color;
+      }
+    }
+  }
+
+  &.is-inline {
+    li {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: $list-item-inline-spacing;
+      }
+    }
+  }
+}

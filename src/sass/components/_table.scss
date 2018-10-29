@@ -1,0 +1,16 @@
+.table {
+  th,
+  td {
+    padding: .5em .75em;
+    border-color: $silver;
+    border-style: solid;
+  }
+
+  th {
+    border-width: 0 0 2px;
+  }
+
+  td {
+    border-width: 0 0 1px;
+  }
+}

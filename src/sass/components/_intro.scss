@@ -1,0 +1,74 @@
+.intro {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  opacity: 0;
+  transition:  opacity 1s linear;
+  position: relative;
+  z-index: 101;
+  background: $white;
+
+  &.is-ready {
+    opacity: 1;
+  }
+}
+
+.intro-background {
+  position: relative;
+  mask: url("~/images/legent-stroke.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-type: alpha;
+  mask-size: 1000% 1000%;
+  width: 100%;
+  transition: mask-size 1s ease;
+
+  .is-ready & {
+    mask-size: 60% 60%;
+  }
+}
+
+.intro-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.intro-signature {
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+  position: absolute;
+  top: 50%;
+
+  &.fred {
+    left: 50%;
+    transform: translate(-200%, -50%);
+  }
+
+  &.sinji {
+    right: 50%;
+    transform: translate(200%, -50%);
+  }
+
+  .is-finished & {
+    display: block;
+  }
+
+  .show-names & {
+    opacity: 1;
+  }
+
+  @include desktop() {
+    margin-left: $gap;
+    margin-right: $gap;
+  }
+
+  svg {
+    max-width: 25rem;
+    width: 100%;
+  }
+}
